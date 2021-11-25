@@ -4,6 +4,9 @@ from abc import ABC, abstractmethod
 class Animal(ABC):
     """Абстрактный класс животных"""
 
+    def __init__(self, name):
+        self.name = name
+
     def move(self):
         print('Im moving')
 
@@ -27,7 +30,7 @@ class Animal(ABC):
 class Cat(Animal):
 
     def __init__(self, age, name):
-        self.name = name
+        super().__init__(name)
         self.age = age
 
     def scream(self):
@@ -43,7 +46,7 @@ class Cat(Animal):
 class Dog(Animal):
 
     def __init__(self, name):
-        self.name = name
+        super().__init__(name)
 
     def scream(self):
         print(f'Gav my name is {self.name}')
@@ -54,6 +57,8 @@ class Dog(Animal):
         print('Gav gav gav')
 
     def kus(self, cat: Cat):
+        if not isinstance(cat, Cat):
+            return
         cat.scream()
         print(f'Dog with name {self.name} KUS cat with name {cat.name}')
 
